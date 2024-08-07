@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000;
 
 // MongoDB connection
 mongoose.connect(
-  "mongodb+srv://mygvp0:kumarram59266@mygvp0.wrf9s.mongodb.net/"
+  "mongodb+srv://mygvp0:kumarram59266@mygvp0.wrf9s.mongodb.net/mygvp?retryWrites=true&w=majority"
   // ,
   // {
   //   useNewUrlParser: true,
@@ -30,8 +30,7 @@ const gpaSchema = new mongoose.Schema({
   },
 });
 
-const Gpa = mongoose.model("Gpa", gpaSchema);
-
+const Gpa = mongoose.model("Result", gpaSchema, "results");
 // Middleware
 app.use(cors());
 app.use(express.json()); // Automatically parses JSON

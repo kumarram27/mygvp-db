@@ -24,7 +24,7 @@ const gpaSchema = new mongoose.Schema({
   },
 });
 
-const Gpa = mongoose.model("Gpa", gpaSchema);
+const Gpa = mongoose.model("Result", gpaSchema, "results");
 
 // Middleware
 app.use(cors());
