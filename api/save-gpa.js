@@ -1,14 +1,16 @@
-// api/save-gpa.js
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
-// console.log("Loaded MongoDB URI:", process.env.MONGODB_URI);
-const uri = `mongodb+srv://mygvp0:kumarram59266@mygvp0.wrf9s.mongodb.net/mygvp?retryWrites=true&w=majority`;
-// console.log(uri);
 
-// MongoDB connection (use environment variables for credentials)
-mongoose.connect(uri);
+// Hardcoded MongoDB URI
+const uri = `mongodb+srv://mygvp0:kumarram59266@mygvp0.wrf9s.mongodb.net/mygvp?retryWrites=true&w=majority`;
+
+// MongoDB connection
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
