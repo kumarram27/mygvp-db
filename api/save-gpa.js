@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const serverless = require("serverless-http");
+
 const app = express();
 
 // Hardcoded MongoDB URI
@@ -85,5 +87,5 @@ app.get("/api/get-gpa/:registrationNumber", async (req, res) => {
   }
 });
 
-// Export the app as a Vercel function
-module.exports = app;
+// Export the app as a serverless function
+module.exports.handler = serverless(app);
