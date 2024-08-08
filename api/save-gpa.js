@@ -1,12 +1,11 @@
 // api/save-gpa.js
-require("dotenv").config({ path: "../.env" });
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
-console.log("Loaded MongoDB URI:", process.env.MONGODB_URI);
-const uri = `${process.env.MONGODB_URI}/mygvp?retryWrites=true&w=majority`;
-console.log(uri);
+// console.log("Loaded MongoDB URI:", process.env.MONGODB_URI);
+const uri = `mongodb+srv://mygvp0:kumarram59266@mygvp0.wrf9s.mongodb.net/mygvp?retryWrites=true&w=majority`;
+// console.log(uri);
 
 // MongoDB connection (use environment variables for credentials)
 mongoose.connect(uri);
