@@ -33,7 +33,10 @@ const Gpa = mongoose.model("Result", gpaSchema, "results");
 app.use(cors());
 app.use(express.json());
 
-// Endpoint to save GPA data
+app.get("/", (req, res) => {
+  res.send("Hello from Vercel!");
+});
+
 app.post("/api/save-gpa", async (req, res) => {
   const { registrationNumber, gpas } = req.body;
 
