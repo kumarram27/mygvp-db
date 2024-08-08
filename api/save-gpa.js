@@ -1,10 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const serverless = require("serverless-http");
+
 const app = express();
+const router = express.Router();
 
 // Hardcoded MongoDB URI (For testing purposes)
-const uri = `mongodb+srv://mygvp0:kumarram59266@mygvp0.wrf9s.mongodb.net/mygvp?retryWrites=true&w=majority`;
+const uri =
+  process.env.MONGODB_URI ||
+  `mongodb+srv://mygvp0:kumarram59266@mygvp0.wrf9s.mongodb.net/mygvp?retryWrites=true&w=majority`;
 
 // MongoDB connection
 mongoose.connect(uri, {
@@ -34,7 +39,7 @@ app.use(cors());
 app.use(express.json());
 
 // Endpoint to save GPA data
-app.post("/api/save-gpa", async (req, res) => {
+router.post("/save-gpa", async (req, res) => {
   const { registrationNumber, gpas } = req.body;
 
   try {
@@ -65,7 +70,7 @@ app.post("/api/save-gpa", async (req, res) => {
 });
 
 // Endpoint to retrieve GPA data
-app.get("/api/get-gpa/:registrationNumber", async (req, res) => {
+router.get("/get-gpa/:registrationNumber", async (req, res) => {
   const { registrationNumber } = req.params;
 
   try {
@@ -82,5 +87,7 @@ app.get("/api/get-gpa/:registrationNumber", async (req, res) => {
   }
 });
 
+app.use("/api", router);
+
 // Export the app as a Vercel function
-module.exports = app;
+module.exports.handler = serverless(app);
